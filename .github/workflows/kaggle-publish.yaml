@@ -1,0 +1,22 @@
+name: kaggle-publish
+on:
+  release:
+    types: [published]
+jobs:
+  push-kaggle:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+      with: { python-version: '3.11' }
+    - run: pip install kaggle jupytext nbconvert
+    - name: Prepare final report notebook
+      run: |
+        # if you keep .py paired via jupytext, convert to ipynb
+        jupytext --to ipynb notebooks/90_report.py || true
+        jupyter-nbconvert --to notebook --execute notebooks/90_report.ipynb --output notebooks/90_report.ipynb --ExecutePreprocessor.timeout=1800
+    - name: Push to Kaggle
+      env:
+        KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
+        KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+      run: kaggle kernels push -p .

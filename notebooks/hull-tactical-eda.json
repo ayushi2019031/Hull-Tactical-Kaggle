@@ -1,0 +1,12 @@
+{
+  "id": "fuzzycoder3794/hull-tactical-analysis",
+  "title": "Hull Tactical Analysis and EDA",
+  "code_file": "notebooks/hull-tactical-eda.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "keywords": ["finance", "eda", "quant", "machine-learning"]
+}
